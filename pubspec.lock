@@ -89,6 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.9"
+  dartz:
+    dependency: "direct main"
+    description:
+      name: dartz
+      sha256: e6acf34ad2e31b1eb00948692468c30ab48ac8250e0f0df661e29f12dd252168
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.1"
   fake_async:
     dependency: transitive
     description:
@@ -320,6 +328,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  pro_dialog:
+    dependency: "direct main"
+    description:
+      name: pro_dialog
+      sha256: "1192d4c64070a4e4cdb626fbfe03a348126e244bc9b87a78a0f679e134d20619"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.9"
   provider:
     dependency: transitive
     description:
@@ -389,6 +405,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: ab2253be8d65ed7a341a43fe62d5cfba404b5969c23bc998964fe5aa8aae465c
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   source_span:
     dependency: transitive
     description:
