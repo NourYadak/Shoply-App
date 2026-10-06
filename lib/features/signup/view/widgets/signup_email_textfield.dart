@@ -6,42 +6,45 @@ class _SignupEmailAddressTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<SignupCubit>();
-    return Column(
-      children: [
-        CustomTextField(
-          validator: (email) {
-            if (email?.isEmpty ?? false) {
-              return 'Email is required';
-            } else if (AppRegex.emailRegex.hasMatch(email ?? '') == false) {
-              return 'Email is not valid';
-            }
-            return null;
-          },
-          controller: cubit.emailController,
-          hinText: 'Email',
-          prefixIcon: Icon(
-            Icons.email_outlined,
-            size: 28,
-            color: Colors.grey.shade800,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          CustomTextField(
+            validator: (email) {
+              if (email?.isEmpty ?? false) {
+                return 'Email is required';
+              } else if (AppRegex.emailRegex.hasMatch(email ?? '') == false) {
+                return 'Email is not valid';
+              }
+              return null;
+            },
+            controller: cubit.emailController,
+            hinText: 'Email',
+            prefixIcon: Icon(
+              Icons.email_outlined,
+              size: 28,
+              color: Colors.grey.shade800,
+            ),
           ),
-        ),
-        SizedBox(height: 15),
-        CustomTextField(
-          validator: (address) {
-            if (address?.isEmpty ?? false) {
-              return 'Address is required';
-            }
-            return null;
-          },
-          controller: cubit.addressController,
-          hinText: 'Address',
-          prefixIcon: Icon(
-            Icons.location_on_outlined,
-            size: 28,
-            color: Colors.grey.shade800,
+          SizedBox(height: 10),
+          CustomTextField(
+            validator: (address) {
+              if (address?.isEmpty ?? false) {
+                return 'Address is required';
+              }
+              return null;
+            },
+            controller: cubit.addressController,
+            hinText: 'Address',
+            prefixIcon: Icon(
+              Icons.location_on_outlined,
+              size: 28,
+              color: Colors.grey.shade800,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

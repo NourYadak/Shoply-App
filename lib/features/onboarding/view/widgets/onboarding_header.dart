@@ -1,6 +1,5 @@
 part of '../on_boarding_screen.dart';
 
-
 class _OnBoardingHeader extends StatelessWidget {
   const _OnBoardingHeader();
 
@@ -28,14 +27,14 @@ class _OnBoardingHeader extends StatelessWidget {
                   children: [
                     Image(
                       image: AssetImage(cubit.onBoardingImage[index]),
-                      height: 420,
+                      height: 400,
                       width: double.infinity,
                     ),
                     const SizedBox(height: 20),
                     Text(
                       cubit.onBoardingTitle[index],
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -45,12 +44,10 @@ class _OnBoardingHeader extends StatelessWidget {
                       cubit.onBoardingDescription[index],
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.grey.shade600,
                       ),
-                                            
-
                     ),
                   ],
                 ),

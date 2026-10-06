@@ -59,12 +59,12 @@ class _MainTextFieldState extends State<CustomTextField> {
                 child: isHide ?? false
                     ? Icon(
                         Icons.visibility_off_outlined,
-                        size: 28,
+                        size: 22,
                         color: Colors.grey.shade800,
                       )
                     : Icon(
                         Icons.visibility_outlined,
-                        size: 28,
+                        size: 22,
                         color: Colors.grey.shade800,
                       ),
               )

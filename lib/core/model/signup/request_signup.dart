@@ -25,4 +25,15 @@ class RequestSignup {
       'profileImage': profileImage,
     };
   }
+
+  factory RequestSignup.fromJson(Map<String, dynamic> json) {
+    return RequestSignup(
+      email: json['email'],
+      fullName: json['fullName'],
+      userName: json['userName'],
+      address: json['address'],
+      uid: json['uid'],
+      profileImage: json['profileImage'],
+    );
+  }
 }

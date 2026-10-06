@@ -6,27 +6,30 @@ class _SignupFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<SignupCubit>();
-    return Column(
-      children: [
-        CustomButton(
-          buttonText: 'Sign Up',
-          onPressed: () {
-            cubit.signup();
-          },
-        ),
-        SizedBox(height: 30),
-        CustomTextButtonWrap(
-          text: 'Already have an account?',
-          textClick: ' Login',
-          onTap: () {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              AppPages.loginScreen,
-              (route) => false,
-            );
-          },
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          CustomButton(
+            buttonText: 'Sign Up',
+            onPressed: () {
+              cubit.signup();
+            },
+          ),
+          SizedBox(height: 20),
+          CustomTextButtonWrap(
+            text: 'Already have an account?',
+            textClick: ' Login',
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppPages.loginScreen,
+                (route) => false,
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

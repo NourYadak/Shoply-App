@@ -24,7 +24,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               child: Column(
                 children: [
                   _ForgotPasswordHeader(),
-                  SizedBox(height: 40),
+                  SizedBox(height: 30),
                   _ForgotPasswordFooter(),
                 ],
               ),

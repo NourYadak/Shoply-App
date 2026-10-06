@@ -21,9 +21,9 @@ class CustomSmoothIndicator extends StatelessWidget {
           effect ??
           WormEffect(
             spacing: 8.0,
-            radius: 20.0,
-            dotWidth: 16.0,
-            dotHeight: 16.0,
+            radius: 15.0,
+            dotWidth: 12.0,
+            dotHeight: 12.0,
             strokeWidth: 1.5,
             dotColor: AppColors.primaryColor.withValues(alpha: 0.3),
             activeDotColor: AppColors.primaryColor,

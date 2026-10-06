@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoply_app/core/regex/app_regex.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
+import 'package:shoply_app/core/utils/images/app_images.dart';
 import 'package:shoply_app/core/utils/theme/app_colors.dart';
 import 'package:shoply_app/core/utils/widgets/appBar/app_bar.dart';
 import 'package:shoply_app/core/utils/widgets/button/custom_button.dart';
@@ -70,13 +71,13 @@ class SignupScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             _SignupHeader(),
-                            SizedBox(height: 20),
+                            SizedBox(height: 10),
                             _SignupNameTextfield(),
-                            SizedBox(height: 15),
+                            SizedBox(height: 10),
                             _SignupEmailAddressTextfield(),
-                            SizedBox(height: 15),
+                            SizedBox(height: 10),
                             _SignupPassTextfield(),
-                            SizedBox(height: 20),
+                            SizedBox(height: 25),
                             _SignupFooter(),
                           ],
                         ),
