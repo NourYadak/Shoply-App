@@ -20,7 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginErrorState(error));
       },
       (userData) {
-        emit(LoginSuccessState());
+        emit(LoginSuccessState(userData));
       },
     );
   }

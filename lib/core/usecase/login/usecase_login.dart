@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shoply_app/core/model/signup/request_signup.dart';
+import 'package:shoply_app/core/model/login/response_login.dart';
 
 class LoginUsecase {
-  Future<Either<String, RequestSignup>> login({
+  Future<Either<String, ResponseLogin>> login({
     required String email,
     required String password,
   }) async {
@@ -37,7 +37,7 @@ class LoginUsecase {
         return Left("User data not found");
       }
 
-      final userData = RequestSignup.fromJson(userDoc.data()!);
+      final userData = ResponseLogin.fromJson(userDoc.data()!);
 
       return Right(userData);
     } on FirebaseAuthException catch (e) {
