@@ -6,7 +6,7 @@ import 'package:shoply_app/features/forgot_pass/view_model/state.dart';
 class ForgotPassCubit extends Cubit<ForgotPassState> {
   ForgotPassCubit(this._forgotPassUseCase) : super(ForgotPassInitialState());
 
-  final ForgotPasswordUsecase _forgotPassUseCase;
+  final ForgotPassUsecase _forgotPassUseCase;
   final emailController = TextEditingController();
 
   Future<void> forgotPassword() async {
@@ -18,8 +18,8 @@ class ForgotPassCubit extends Cubit<ForgotPassState> {
       (error) {
         emit(ForgotPassErrorState(error));
       },
-      (userData) {
-        emit(ForgotPassSuccessState(userData));
+      (_) {
+        emit(ForgotPassSuccessState('Password reset email sent successfully.'));
       },
     );
   }
