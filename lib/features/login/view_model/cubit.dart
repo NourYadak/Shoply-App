@@ -22,6 +22,7 @@ class LoginCubit extends Cubit<LoginState> {
       (userData) {
         emit(LoginSuccessState(userData));
       },
+    
     );
   }
   @override

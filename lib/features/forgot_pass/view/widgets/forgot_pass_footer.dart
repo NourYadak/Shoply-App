@@ -27,7 +27,12 @@ class _ForgotPasswordFooter extends StatelessWidget {
             ),
           ),
           SizedBox(height: 35),
-          CustomButton(buttonText: 'Send Reset Link', onPressed: () {}),
+          CustomButton(
+            buttonText: 'Send Reset Link',
+            onPressed: () {
+              context.read<ForgotPassCubit>().forgotPassword();
+            },
+          ),
           SizedBox(height: 30),
           CustomTextButton(
             onTap: () {
