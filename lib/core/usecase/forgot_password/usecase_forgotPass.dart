@@ -20,7 +20,7 @@ class ForgotPassUsecase {
         androidPackageName: 'com.example.shoply_app',
         handleCodeInApp: true,
         url:
-            'https://shoply-app-591a7.firebaseapp.com/__/auth/action?email=$email',
+            'https://shoply-app-591a7.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
       );
 
       await FirebaseAuth.instance.sendPasswordResetEmail(

@@ -18,7 +18,7 @@ class _ForgotPasswordFooter extends StatelessWidget {
               }
               return null;
             },
-            controller: TextEditingController(),
+            controller: context.read<ForgotPassCubit>().emailController,
             hinText: 'Email',
             prefixIcon: Icon(
               Icons.email_outlined,
