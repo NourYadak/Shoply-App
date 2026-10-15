@@ -26,4 +26,12 @@ class LocalStorage {
   bool? getShowOnboard() {
     return _preferences?.getBool('showOnboard');
   }
+
+  Future<void> setIsLogin({required bool isLogin}) async {
+    await _preferences?.setBool('isLogin', isLogin);
+  }
+
+  bool? getIsLogin() {
+    return _preferences?.getBool('isLogin');
+  }
 }

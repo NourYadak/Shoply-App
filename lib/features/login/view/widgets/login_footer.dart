@@ -5,6 +5,7 @@ class _LoginFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LoginCubit>();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -12,14 +13,7 @@ class _LoginFooter extends StatelessWidget {
           CustomButton(
             buttonText: 'Login',
             onPressed: () {
-              context.read<LoginCubit>().login(
-                email: context.read<LoginCubit>().emailController.text.trim(),
-                password: context
-                    .read<LoginCubit>()
-                    .passwordController
-                    .text
-                    .trim(),
-              );
+              cubit.login();
             },
           ),
           SizedBox(height: 30),

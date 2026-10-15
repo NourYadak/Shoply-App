@@ -5,8 +5,11 @@ class _ForgotPasswordFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ForgotPassCubit>();
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
+
       child: Column(
         children: [
           CustomTextField(
@@ -18,7 +21,7 @@ class _ForgotPasswordFooter extends StatelessWidget {
               }
               return null;
             },
-            controller: context.read<ForgotPassCubit>().emailController,
+            controller: cubit.emailController,
             hinText: 'Email',
             prefixIcon: Icon(
               Icons.email_outlined,
@@ -30,7 +33,7 @@ class _ForgotPasswordFooter extends StatelessWidget {
           CustomButton(
             buttonText: 'Send Reset Link',
             onPressed: () {
-              context.read<ForgotPassCubit>().forgotPassword();
+              cubit.forgotPassword();
             },
           ),
           SizedBox(height: 30),

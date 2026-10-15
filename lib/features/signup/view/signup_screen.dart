@@ -27,7 +27,7 @@ class SignupScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => SignupCubit(),
       child: Scaffold(
-        appBar: CustomAppBar(title: 'Create Account'),
+        appBar: CustomAppBar(titleText: 'Create Account'),
         body: BlocListener<SignupCubit, SignupState>(
           listener: (context, state) {
             if (state is SignupLoadingState) {

@@ -22,9 +22,9 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ForgotPassCubit(ForgotPassUsecase()),
+      create: (context) => ForgotPassCubit(),
       child: Scaffold(
-        appBar: CustomAppBar(title: ''),
+        appBar: CustomAppBar(titleText: ''),
         body: BlocListener<ForgotPassCubit, ForgotPassState>(
           listener: (context, state) {
             if (state is ForgotPassLoadingState) {
@@ -43,7 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               Navigator.pop(context);
               CustomSuccessDialog.showProSuccessDialog(
                 context: context,
-                title: 'Reset Email Sent Successfully',
+                title: 'Reset Email Sent Successfullyt',
                 description: state.message,
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(

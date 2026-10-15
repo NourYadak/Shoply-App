@@ -1,49 +1,56 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shoply_app/core/helper/error_handle_helper.dart';
 import 'package:shoply_app/core/model/login/response_login.dart';
+import 'package:shoply_app/core/model/login/request_login.dart';
 
 class LoginUsecase {
   Future<Either<String, ResponseLogin>> login({
-    required String email,
-    required String password,
+    required RequestLogin requestLogin,
   }) async {
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: requestLogin.email ?? '',
+        password: requestLogin.password ?? '',
       );
 
       final user = credential.user;
 
-      if (user == null) {
-        return Left("User not found");
-      }
+      if (!user!.emailVerified) {
+        return Left("Please verify your email and then login!");
+      } else {
+        final snapshotUser = await _getUserinfo(uid: user.uid);
 
-      if (!user.emailVerified) {
-        await FirebaseAuth.instance.signOut();
-        return Left(
-          "Email not verified. Please verify your email before logging in.",
+        return snapshotUser.fold(
+          (errorMessage) {
+            return Left(errorMessage);
+          },
+          (responseLogin) {
+            return Right(responseLogin);
+          },
         );
       }
+    } on FirebaseAuthException catch (e) {
+      final error = ErrorHandleHelper.getCustomErrorMessage(e.code);
+      return Left(error);
+    }
+  }
 
-      final uid = user.uid;
-      final userDoc = await FirebaseFirestore.instance
+  Future<Either<String, ResponseLogin>> _getUserinfo({
+    required String uid,
+  }) async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
           .collection('User')
           .doc(uid)
           .get();
 
-      if (!userDoc.exists) {
-        return Left("User data not found");
-      }
+      final responseLogin = ResponseLogin.fromJson(snapshot.data() ?? {});
 
-      final userData = ResponseLogin.fromJson(userDoc.data()!);
-
-      return Right(userData);
-    } on FirebaseAuthException catch (e) {
-      return Left(e.message ?? 'Login failed');
+      return Right(responseLogin);
     } on FirebaseException catch (e) {
-      return Left(e.message ?? 'Failed to get user data');
+      return Left(e.message ?? '');
     }
   }
 }

@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shoply_app/core/model/signup/request_signup.dart';
+import 'package:shoply_app/core/service/upload_image_service.dart';
 
 class SignupUsecase {
   Future<Either<String, bool>> signup({
     required String password,
     required RequestSignup requestSignup,
+    required File? image,
   }) async {
     try {
       final snapshot = await FirebaseAuth.instance
@@ -28,6 +32,15 @@ class SignupUsecase {
       return Right(true);
     } on FirebaseAuthException catch (e) {
       return Left(e.message ?? '');
+    }
+  }
+
+  Future<String?> _uploadImage({required File? image}) async {
+    if (image != null) {
+      final imageUrl = await UploadImageService.uplaodImage(imageFile: image);
+      return imageUrl;
+    } else {
+      return null;
     }
   }
 
