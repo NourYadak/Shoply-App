@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shoply_app/core/utils/theme/app_colors.dart';
@@ -7,22 +8,36 @@ class CustomCachedImageNetwork extends StatelessWidget {
     super.key,
     required this.image,
     this.errorWidget,
+    this.fit = BoxFit.cover,
+    this.width,
+    this.height,
   });
+
   final String image;
   final Widget? errorWidget;
+  final BoxFit fit;
+  final double? width;
+  final double? height;
+
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      height: 120,
-      width: 150,
       imageUrl: image,
-      fit: BoxFit.cover,
+      width: width,
+      height: height,
+      fit: fit,
       placeholder: (context, url) => Center(
-        child: CircularProgressIndicator(color: AppColors.primaryColor),
+        child: CircularProgressIndicator(
+          color: AppColors.primaryColor,
+        ),
       ),
       errorWidget: (context, url, error) =>
           errorWidget ??
-          Icon(Icons.error_outline, size: 28, color: AppColors.error),
+          Icon(
+            Icons.error_outline,
+            size: 28,
+            color: AppColors.error,
+          ),
     );
   }
 }

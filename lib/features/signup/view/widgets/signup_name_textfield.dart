@@ -1,3 +1,4 @@
+
 part of '../signup_screen.dart';
 
 class _SignupNameTextfield extends StatelessWidget {
@@ -6,14 +7,18 @@ class _SignupNameTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<SignupCubit>();
+    final isTablet = Responsive.isTablet(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.width(isTablet ? 12 : 8),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomTextField(
             validator: (fullName) {
-              if (fullName?.isEmpty ?? false) {
+              if (fullName?.trim().isEmpty ?? true) {
                 return 'Full Name is required';
               }
               return null;
@@ -22,14 +27,16 @@ class _SignupNameTextfield extends StatelessWidget {
             hinText: 'Full Name',
             prefixIcon: Icon(
               Icons.person_outlined,
-              size: 28,
+              size: Responsive.width(isTablet ? 30 : 26),
               color: Colors.grey.shade800,
             ),
           ),
-          SizedBox(height: 10),
+
+          SizedBox(height: Responsive.height(12)),
+
           CustomTextField(
             validator: (userName) {
-              if (userName?.isEmpty ?? false) {
+              if (userName?.trim().isEmpty ?? true) {
                 return 'Username is required';
               }
               return null;
@@ -38,7 +45,7 @@ class _SignupNameTextfield extends StatelessWidget {
             hinText: 'Username',
             prefixIcon: Icon(
               Icons.person_outlined,
-              size: 28,
+              size: Responsive.width(isTablet ? 30 : 26),
               color: Colors.grey.shade800,
             ),
           ),

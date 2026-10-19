@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
@@ -7,9 +8,11 @@ import 'package:shoply_app/core/utils/widgets/button/custom_button.dart';
 import 'package:shoply_app/core/utils/widgets/dialog/custom_error.dart';
 import 'package:shoply_app/core/utils/widgets/loading/custom_loading.dart';
 import 'package:shoply_app/core/utils/widgets/button/custom_text_button_wrap.dart';
+import 'package:shoply_app/core/utils/widgets/responsive/responsive.dart';
 import 'package:shoply_app/core/utils/widgets/textfield/custom_textfield.dart';
 import 'package:shoply_app/features/login/view_model/cubit.dart';
 import 'package:shoply_app/features/login/view_model/state.dart';
+
 part 'widgets/login_header.dart';
 part 'widgets/login_body.dart';
 part 'widgets/login_footer.dart';
@@ -19,6 +22,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: Scaffold(
@@ -48,22 +53,40 @@ class LoginScreen extends StatelessWidget {
           child: Builder(
             builder: (context) {
               final cubit = context.read<LoginCubit>();
+
               return SafeArea(
                 child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Center(
-                      child: Form(
-                        key: cubit.formKey,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 20),
-                            _LoginHeader(),
-                            SizedBox(height: 50),
-                            _LoginBody(),
-                            SizedBox(height: 50),
-                            _LoginFooter(),
-                          ],
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: isTablet ? 520 : double.infinity,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Responsive.width(isTablet ? 32 : 16),
+                          vertical: Responsive.height(16),
+                        ),
+                        child: Form(
+                          key: cubit.formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SizedBox(height: Responsive.height(8)),
+                              const _LoginHeader(),
+                              SizedBox(
+                                height: Responsive.height(
+                                  isTablet ? 40 : 30,
+                                ),
+                              ),
+                              const _LoginBody(),
+                              SizedBox(
+                                height: Responsive.height(
+                                  isTablet ? 40 : 30,
+                                ),
+                              ),
+                              const _LoginFooter(),
+                            ],
+                          ),
                         ),
                       ),
                     ),

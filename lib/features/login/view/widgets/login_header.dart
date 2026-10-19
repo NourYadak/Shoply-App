@@ -5,29 +5,34 @@ class _LoginHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(Responsive.width(isTablet ? 12 : 8)),
       child: Column(
         children: [
           Image(
             image: AssetImage(AppImages.shoplySplashImage),
-            height: 200,
-            width: 240,
-            fit: BoxFit.cover,
+            height: Responsive.height(isTablet ? 240 : 180),
+            width: double.infinity,
+            fit: BoxFit.contain,
           ),
-          SizedBox(height: 10),
+          SizedBox(height: Responsive.height(12)),
           Text(
-            'Welcom Back',
+            'Welcome Back',
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 35,
+              fontSize: Responsive.font(isTablet ? 40 : 32),
               fontWeight: FontWeight.w800,
               color: Colors.black,
             ),
           ),
+          SizedBox(height: Responsive.height(6)),
           Text(
-            'Sign to countinue shopping',
+            'Sign in to continue shopping',
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: Responsive.font(isTablet ? 22 : 17),
               fontWeight: FontWeight.w600,
               color: Colors.grey.shade600,
             ),

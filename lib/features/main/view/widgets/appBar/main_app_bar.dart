@@ -1,3 +1,4 @@
+
 part of '../../main_screen.dart';
 
 class _MainAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -5,13 +6,16 @@ class _MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+
     return CustomAppBar(
       title: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Text(
             'Shop',
             style: TextStyle(
-              fontSize: 25,
+              fontSize: Responsive.font(isTablet ? 30 : 25),
               fontWeight: FontWeight.bold,
               color: Colors.black,
               fontStyle: FontStyle.normal,
@@ -20,7 +24,7 @@ class _MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           Text(
             'ly',
             style: TextStyle(
-              fontSize: 25,
+              fontSize: Responsive.font(isTablet ? 30 : 25),
               fontWeight: FontWeight.bold,
               color: AppColors.primaryColor,
               fontStyle: FontStyle.normal,
@@ -32,5 +36,5 @@ class _MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
+  Size get preferredSize => AppBar().preferredSize;
 }

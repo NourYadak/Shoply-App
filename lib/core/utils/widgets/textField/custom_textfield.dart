@@ -48,9 +48,9 @@ class _MainTextFieldState extends State<CustomTextField> {
       cursorColor: Colors.grey,
       decoration: InputDecoration(
         helperText: '',
-        helperStyle: TextStyle(fontSize: 12),
+        helperStyle: TextStyle(fontSize: 10),
         hintText: widget.hinText,
-        hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 17),
+        hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 14),
         suffixIcon: widget.obscureText == true
             ? GestureDetector(
                 onTap: () {

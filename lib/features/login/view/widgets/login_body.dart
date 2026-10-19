@@ -5,9 +5,13 @@ class _LoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+    final cubit = context.read<LoginCubit>();
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(Responsive.width(isTablet ? 12 : 8)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomTextField(
             validator: (email) {
@@ -16,15 +20,15 @@ class _LoginBody extends StatelessWidget {
               }
               return null;
             },
-            controller: context.read<LoginCubit>().emailController,
+            controller: cubit.emailController,
             hinText: 'Email',
             prefixIcon: Icon(
               Icons.email_outlined,
-              size: 28,
+              size: Responsive.width(isTablet ? 30 : 26),
               color: Colors.grey.shade800,
             ),
           ),
-          SizedBox(height: 5),
+          SizedBox(height: Responsive.height(12)),
           CustomTextField(
             validator: (password) {
               if (password?.isEmpty ?? false) {
@@ -33,25 +37,26 @@ class _LoginBody extends StatelessWidget {
               return null;
             },
             obscureText: true,
-            controller: context.read<LoginCubit>().passwordController,
+            controller: cubit.passwordController,
             hinText: 'Password',
             prefixIcon: Icon(
               Icons.lock_outline,
-              size: 28,
+              size: Responsive.width(isTablet ? 30 : 26),
               color: Colors.grey.shade800,
             ),
           ),
-          SizedBox(height: 5),
+          SizedBox(height: Responsive.height(8)),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, AppPages.forgotPasswordScreen);
             },
             child: Align(
-              alignment: AlignmentGeometry.centerRight,
+              alignment: Alignment.centerRight,
               child: Text(
-                'ForgotPassword?',
+                'Forgot Password?',
+                textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: Responsive.font(isTablet ? 19 : 16),
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryColor,
                 ),

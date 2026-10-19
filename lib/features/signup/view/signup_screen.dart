@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoply_app/core/regex/app_regex.dart';
@@ -11,8 +12,10 @@ import 'package:shoply_app/core/utils/widgets/dialog/custom_success.dart';
 import 'package:shoply_app/core/utils/widgets/loading/custom_loading.dart';
 import 'package:shoply_app/core/utils/widgets/button/custom_text_button_wrap.dart';
 import 'package:shoply_app/core/utils/widgets/textField/custom_textfield.dart';
+import 'package:shoply_app/core/utils/widgets/responsive/responsive.dart';
 import 'package:shoply_app/features/signup/view_model/cubit.dart';
 import 'package:shoply_app/features/signup/view_model/state.dart';
+
 part 'widgets/signup_header.dart';
 part 'widgets/signup_name_textfield.dart';
 part 'widgets/signup_email_textfield.dart';
@@ -24,14 +27,20 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+
     return BlocProvider(
       create: (context) => SignupCubit(),
       child: Scaffold(
-        appBar: CustomAppBar(titleText: 'Create Account'),
+        appBar: CustomAppBar(
+          titleText: 'Create Account',
+        ),
         body: BlocListener<SignupCubit, SignupState>(
           listener: (context, state) {
             if (state is SignupLoadingState) {
-              CustomLoading.showDialogLoading(context: context);
+              CustomLoading.showDialogLoading(
+                context: context,
+              );
             } else if (state is SignupErrorState) {
               Navigator.pop(context);
               CustomDialogError.showProDialogError(
@@ -61,23 +70,53 @@ class SignupScreen extends StatelessWidget {
           child: Builder(
             builder: (context) {
               final cubit = context.read<SignupCubit>();
+
               return SafeArea(
                 child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Center(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Responsive.width(
+                      isTablet ? 32 : 16,
+                    ),
+                    vertical: Responsive.height(12),
+                  ),
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: isTablet ? 520 : double.infinity,
+                      ),
                       child: Form(
                         key: cubit.formKey,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             _SignupHeader(),
-                            SizedBox(height: 10),
+
+                            SizedBox(
+                              height: Responsive.height(
+                                isTablet ? 20 : 10,
+                              ),
+                            ),
+
                             _SignupNameTextfield(),
-                            SizedBox(height: 10),
+
+                            SizedBox(
+                              height: Responsive.height(12),
+                            ),
+
                             _SignupEmailAddressTextfield(),
-                            SizedBox(height: 10),
+
+                            SizedBox(
+                              height: Responsive.height(12),
+                            ),
+
                             _SignupPassTextfield(),
-                            SizedBox(height: 25),
+
+                            SizedBox(
+                              height: Responsive.height(
+                                isTablet ? 32 : 25,
+                              ),
+                            ),
+
                             _SignupFooter(),
                           ],
                         ),

@@ -5,71 +5,111 @@ class _MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+
     return Drawer(
-      width: 330,
+      width: Responsive.width(
+        isTablet ? 400 : 330,
+      ).clamp(0.0, MediaQuery.sizeOf(context).width * 0.85),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.width(isTablet ? 16 : 8),
+          ),
           child: Column(
             children: [
-              SizedBox(height: 15),
+              SizedBox(height: Responsive.height(15)),
+
               Row(
-                spacing: 15,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(width: 14),
                   Container(
-                    height: 95,
-                    width: 95,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    height: Responsive.width(isTablet ? 110 : 85),
+                    width: Responsive.width(isTablet ? 110 : 85),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: CustomCachedImageNetwork(
                       errorWidget: Image(
                         image: AssetImage(AppImages.profilePicture),
+                        fit: BoxFit.cover,
                       ),
                       image: LocalStorageUser.instance.profileImage,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 6,
-                    children: [
-                      Text(
-                        LocalStorageUser.instance.fullName,
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w800,
+
+                  SizedBox(width: Responsive.width(12)),
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          LocalStorageUser.instance.fullName,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: Responsive.font(isTablet ? 20 : 17),
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
-                      ),
-                      Text(
-                        LocalStorageUser.instance.email,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w300,
+                        SizedBox(height: Responsive.height(6)),
+                        Text(
+                          LocalStorageUser.instance.email,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: Responsive.font(isTablet ? 16 : 14),
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 10),
-              Divider(thickness: 0.1, color: Colors.grey),
-              SizedBox(height: 20),
+
+              SizedBox(height: Responsive.height(10)),
+
+              const Divider(thickness: 0.1, color: Colors.grey),
+
+              SizedBox(height: Responsive.height(20)),
+
               CustomListTile(
                 iconData: Icons.shopping_bag_outlined,
                 title: 'My Orders',
               ),
-              SizedBox(height: 20),
+
+              SizedBox(height: Responsive.height(20)),
+
               CustomListTile(
                 iconData: Icons.settings_outlined,
                 title: 'Settings',
+                onTap: () {
+                  Navigator.pushNamed(context, AppPages.settingsScreen);
+                },
               ),
-              SizedBox(height: 20),
-              CustomListTile(iconData: Icons.info_outline, title: 'About'),
-              Spacer(),
+
+              SizedBox(height: Responsive.height(20)),
+
+              CustomListTile(
+                iconData: Icons.info_outline,
+                title: 'About',
+                onTap: () {
+                  Navigator.pushNamed(context, AppPages.aboutScreen);
+                },
+              ),
+
+              const Spacer(),
+
               CustomListTile(
                 iconData: Icons.logout,
                 title: 'Logout',
                 color: Colors.red,
               ),
-              SizedBox(height: 100),
+
+              SizedBox(height: Responsive.height(24)),
             ],
           ),
         ),

@@ -5,33 +5,41 @@ class _ForgotPasswordHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+    final circleSize = Responsive.width(isTablet ? 180 : 140);
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(Responsive.width(isTablet ? 12 : 8)),
       child: Column(
         children: [
           Container(
-            height: 150,
-            width: 150,
+            height: circleSize,
+            width: circleSize,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.primaryColor.withValues(alpha: 0.15),
             ),
-            child: Icon(Icons.lock, size: 70, color: AppColors.primaryColor),
+            child: Icon(
+              Icons.lock,
+              size: Responsive.width(isTablet ? 80 : 60),
+              color: AppColors.primaryColor,
+            ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: Responsive.height(20)),
           Text(
             'Forgot Password?',
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 26,
+              fontSize: Responsive.font(isTablet ? 32 : 26),
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 15),
+          SizedBox(height: Responsive.height(12)),
           Text(
-            'Enter your email and we\'ll send\nyour rest link.',
+            'Enter your email and we\'ll send\nyour reset link.',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: Responsive.font(isTablet ? 22 : 17),
               fontWeight: FontWeight.w600,
               color: Colors.grey.shade600,
             ),

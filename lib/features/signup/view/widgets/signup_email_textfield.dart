@@ -1,3 +1,4 @@
+
 part of '../signup_screen.dart';
 
 class _SignupEmailAddressTextfield extends StatelessWidget {
@@ -6,15 +7,20 @@ class _SignupEmailAddressTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<SignupCubit>();
+    final isTablet = Responsive.isTablet(context);
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.width(isTablet ? 12 : 8),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomTextField(
             validator: (email) {
-              if (email?.isEmpty ?? false) {
+              if (email?.trim().isEmpty ?? true) {
                 return 'Email is required';
-              } else if (AppRegex.emailRegex.hasMatch(email ?? '') == false) {
+              } else if (!AppRegex.emailRegex.hasMatch(email!.trim())) {
                 return 'Email is not valid';
               }
               return null;
@@ -23,14 +29,16 @@ class _SignupEmailAddressTextfield extends StatelessWidget {
             hinText: 'Email',
             prefixIcon: Icon(
               Icons.email_outlined,
-              size: 28,
+              size: Responsive.width(isTablet ? 30 : 26),
               color: Colors.grey.shade800,
             ),
           ),
-          SizedBox(height: 10),
+
+          SizedBox(height: Responsive.height(12)),
+
           CustomTextField(
             validator: (address) {
-              if (address?.isEmpty ?? false) {
+              if (address?.trim().isEmpty ?? true) {
                 return 'Address is required';
               }
               return null;
@@ -39,7 +47,7 @@ class _SignupEmailAddressTextfield extends StatelessWidget {
             hinText: 'Address',
             prefixIcon: Icon(
               Icons.location_on_outlined,
-              size: 28,
+              size: Responsive.width(isTablet ? 30 : 26),
               color: Colors.grey.shade800,
             ),
           ),

@@ -1,3 +1,4 @@
+
 part of '../signup_screen.dart';
 
 class _SignupFooter extends StatelessWidget {
@@ -6,9 +7,14 @@ class _SignupFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<SignupCubit>();
+    final isTablet = Responsive.isTablet(context);
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.width(isTablet ? 12 : 8),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomButton(
             buttonText: 'Sign Up',
@@ -16,17 +22,23 @@ class _SignupFooter extends StatelessWidget {
               cubit.signup();
             },
           ),
-          SizedBox(height: 20),
-          CustomTextButtonWrap(
-            text: 'Already have an account?',
-            textClick: ' Login',
-            onTap: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                AppPages.loginScreen,
-                (route) => false,
-              );
-            },
+
+          SizedBox(
+            height: Responsive.height(isTablet ? 28 : 20),
+          ),
+
+          Center(
+            child: CustomTextButtonWrap(
+              text: 'Already have an account?',
+              textClick: ' Login',
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AppPages.loginScreen,
+                  (route) => false,
+                );
+              },
+            ),
           ),
         ],
       ),
