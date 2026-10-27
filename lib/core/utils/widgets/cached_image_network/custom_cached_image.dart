@@ -29,6 +29,7 @@ class CustomCachedImageNetwork extends StatelessWidget {
       placeholder: (context, url) => Center(
         child: CircularProgressIndicator(
           color: AppColors.primaryColor,
+          
         ),
       ),
       errorWidget: (context, url, error) =>

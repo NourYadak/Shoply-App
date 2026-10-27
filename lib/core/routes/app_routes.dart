@@ -7,10 +7,12 @@ import 'package:shoply_app/features/categories/view/categories_screen.dart';
 import 'package:shoply_app/features/contact_screen.dart/view/contact_screen.dart';
 import 'package:shoply_app/features/favorite/view/favorite_screen.dart';
 import 'package:shoply_app/features/forgot_pass/view/forgot_pass_screen.dart';
+//import 'package:shoply_app/features/language/view/language_screen.dart';
 import 'package:shoply_app/features/login/view/login_screen.dart';
 import 'package:shoply_app/features/main/view/main_screen.dart';
 import 'package:shoply_app/features/main/view_model/cubit.dart';
 import 'package:shoply_app/features/onboarding/view/on_boarding_screen.dart';
+import 'package:shoply_app/features/orders/view/orders_screen.dart';
 import 'package:shoply_app/features/privacy_policy_screen/view/privacy_policy_screen.dart';
 import 'package:shoply_app/features/product_details/view/product_details_screen.dart';
 import 'package:shoply_app/features/products/view/products_screen.dart';
@@ -18,10 +20,11 @@ import 'package:shoply_app/features/profile/view/profile_screen.dart';
 import 'package:shoply_app/features/settings/view/settings_screen.dart';
 import 'package:shoply_app/features/signup/view/signup_screen.dart';
 import 'package:shoply_app/features/splash/view/splash_screen.dart';
-import 'package:shoply_app/core/model/products/response_products.dart';
 import 'package:shoply_app/features/terms_conditions_screen/view/terms_conditions_screen.dart';
 import 'package:shoply_app/features/update_pass/view/update_pass_screen.dart';
 import 'package:shoply_app/features/update_profile/view/update_profile_screen.dart';
+
+//import 'package:shoply_app/features/theme/view/theme_screen.dart';
 
 class AppRoutes {
   static Route? onGenerateRoute(RouteSettings settings) {
@@ -68,52 +71,56 @@ class AppRoutes {
           },
         );
 
-      case AppPages.categoriesScreen:
-        return MaterialPageRoute(
-          builder: (_) {
-            final arguments = settings.arguments as Map<String, dynamic>;
-            final mainCubit = arguments['mainCubit'] as MainCubit;
+      // case AppPages.themeScreen:
+      //   return MaterialPageRoute(
+      //     builder: (context) {
+      //       return const ThemeScreen();
+      //     },
+      //   );
 
-            return BlocProvider.value(
-              value: mainCubit,
-              child: const CategoriesScreen(),
-            );
-          },
+      // case AppPages.languageScreen:
+      //   return MaterialPageRoute(
+      //     builder: (context) {
+      //       return const LanguageScreen();
+      //     },
+      //   );
+
+      case AppPages.categoriesScreen:
+        final mainCubit = settings.arguments as MainCubit;
+
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: mainCubit,
+            child: const CategoriesScreen(),
+          ),
         );
 
       case AppPages.productsScreen:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final titleText = arguments['titleText'] as String;
+        final categoryId = arguments['categoryId'] as String;
+        final mainCubit = arguments['mainCubit'] as MainCubit;
+
         return MaterialPageRoute(
-          builder: (_) {
-            final arguments = settings.arguments as Map<String, dynamic>;
-            final mainCubit = arguments['mainCubit'] as MainCubit;
-            //final titleText = arguments['titleText'] as String;
-            //final categoryId = arguments['categoryId'] as String;
-            //final context = arguments['context'] as BuildContext;
-            return BlocProvider.value(
-              value: mainCubit,
-              child: ProductsScreen(
-                titleText: arguments['titleText'] as String,
-                categoryId: arguments['categoryId'] as String,
-              ),
-            );
-          },
+          builder: (_) => BlocProvider.value(
+            value: mainCubit,
+            child: ProductsScreen(titleText: titleText, categoryId: categoryId),
+          ),
         );
 
       case AppPages.productsDetailsScreen:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final responseProducts =
+            arguments['responseProducts'] as ResponseProducts;
+        final mainCubit = arguments['mainCubit'] as MainCubit;
+
         return MaterialPageRoute(
-          builder: (_) {
-            final arguments = settings.arguments as Map<String, dynamic>;
-
-            final mainCubit = arguments['mainCubit'] as MainCubit;
-            final responseProducts =
-                arguments['responseProducts'] as ResponseProducts;
-
-            return BlocProvider.value(
-              value: mainCubit,
-              child: ProductDetailsScreen(responseProducts: responseProducts),
-            );
-          },
+          builder: (_) => BlocProvider.value(
+            value: mainCubit,
+            child: ProductDetailsScreen(responseProducts: responseProducts),
+          ),
         );
+
       case AppPages.favoriteScreen:
         return MaterialPageRoute(
           builder: (_) {
@@ -174,8 +181,14 @@ class AppRoutes {
             return const UpdateProfileScreen();
           },
         );
-    }
 
+      case AppPages.ordersScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const OrdersScreen();
+          },
+        );
+    }
     return null;
   }
 }

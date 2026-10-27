@@ -23,7 +23,7 @@ class LocalStorage {
     await _preferences?.setBool('showOnboard', isShowOnboard);
   }
 
-  bool? getShowOnboard() {
+  bool? getShowOnBoard() {
     return _preferences?.getBool('showOnboard');
   }
 
@@ -33,5 +33,21 @@ class LocalStorage {
 
   bool? getIsLogin() {
     return _preferences?.getBool('isLogin');
+  }
+
+  Future<void> setTheme({required String themeMode}) async {
+    await _preferences?.setString('themeMode', themeMode);
+  }
+
+  String? getThemeMode() {
+    return _preferences?.getString('themeMode');
+  }
+
+  Future<void> setLanguage({required String languageCode}) async {
+    await _preferences?.setString('language', languageCode);
+  }
+
+  String? getLanguage() {
+    return _preferences?.getString('language');
   }
 }

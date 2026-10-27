@@ -22,7 +22,7 @@ class LoginUsecase {
       } else {
         final snapshotUser = await _getUserinfo(uid: user.uid);
 
-        return snapshotUser.fold(
+        return await snapshotUser.fold(
           (errorMessage) {
             return Left(errorMessage);
           },

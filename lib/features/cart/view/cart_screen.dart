@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoply_app/core/utils/theme/app_colors.dart';
 import 'package:shoply_app/core/utils/widgets/button/custom_button.dart';
 import 'package:shoply_app/core/utils/widgets/cached_image_network/custom_cached_image.dart';
 import 'package:shoply_app/core/utils/widgets/dialog/custom_error.dart';

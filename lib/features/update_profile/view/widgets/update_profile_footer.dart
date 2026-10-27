@@ -5,17 +5,13 @@ class _UpdateProfileFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<UpdateProfileCubit>();
-    final isTablet = Responsive.isTablet(context);
-
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Responsive.width(isTablet ? 12 : 4),
-      ),
+    return SizedBox(
+      width: double.infinity,
       child: CustomButton(
         buttonText: 'Save Changes',
         onPressed: () {
-          cubit.updateProfile();
+          FocusScope.of(context).unfocus();
+          context.read<UpdateProfileCubit>().updateProfile();
         },
       ),
     );

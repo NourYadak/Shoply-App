@@ -1,17 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pro_dialog/pro_dialog.dart';
 import 'package:shoply_app/core/local/local_storage_user.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
 import 'package:shoply_app/core/utils/images/app_images.dart';
 import 'package:shoply_app/core/utils/theme/app_colors.dart';
 import 'package:shoply_app/core/utils/widgets/appBar/app_bar.dart';
 import 'package:shoply_app/core/utils/widgets/cached_image_network/custom_cached_image.dart';
+import 'package:shoply_app/core/utils/widgets/dialog/custom_dialog.dart';
 import 'package:shoply_app/core/utils/widgets/list_tile/custom_list_tile.dart';
 import 'package:shoply_app/core/utils/widgets/responsive/responsive.dart';
 import 'package:shoply_app/features/main/view_model/cubit.dart';
 import 'package:shoply_app/features/main/view_model/state.dart';
-
 part 'widgets/bottom_nav_bar/main_bottom_navBar.dart';
 part 'widgets/drawer/main_drawer.dart';
 part 'widgets/appBar/main_app_bar.dart';

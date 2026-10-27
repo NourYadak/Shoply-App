@@ -49,6 +49,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_animate: ^4.5.2
   firebase_storage: ^13.6.0
+  easy_localization: ^3.0.8
 
 dev_dependencies:
   flutter_test:

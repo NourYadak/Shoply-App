@@ -6,7 +6,7 @@ class _MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTablet = Responsive.isTablet(context);
-
+    final cubit = context.read<MainCubit>();
     return Drawer(
       width: Responsive.width(
         isTablet ? 400 : 330,
@@ -79,6 +79,9 @@ class _MainDrawer extends StatelessWidget {
               CustomListTile(
                 iconData: Icons.shopping_bag_outlined,
                 title: 'My Orders',
+                onTap: () {
+                  Navigator.pushNamed(context, AppPages.ordersScreen);
+                },
               ),
 
               SizedBox(height: Responsive.height(20)),
@@ -103,13 +106,48 @@ class _MainDrawer extends StatelessWidget {
 
               const Spacer(),
 
+              // CustomListTile(
+              //   iconData: Icons.logout,
+              //   title: 'Logout',
+              //   color: Colors.red,
+              // ),
               CustomListTile(
+                onTap: () {
+                  CustomDialog.showCustomProDialog(
+                    context: context,
+                    title: 'Logout',
+                    description: 'Are you sure you want to log out?',
+                    dialogType: DialogType.error,
+                    iconBackgroundColor: Colors.red,
+                    iconColor: Colors.white,
+                    icon: Icons.logout,
+                    buttons: [
+                      DialogButton(
+                        text: 'Cancel',
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      DialogButton(
+                        text: 'Logout',
+                        isPrimary: true,
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            AppPages.loginScreen,
+                            (route) => false,
+                          );
+                          cubit.logout();
+                        },
+                      ),
+                    ],
+                  );
+                },
+
                 iconData: Icons.logout,
                 title: 'Logout',
                 color: Colors.red,
               ),
-
-              SizedBox(height: Responsive.height(24)),
             ],
           ),
         ),

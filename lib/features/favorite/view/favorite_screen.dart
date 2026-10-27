@@ -1,129 +1,105 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:shoply_app/core/utils/widgets/appBar/app_bar.dart';
+import 'package:shoply_app/core/model/cart/cart.dart';
+import 'package:shoply_app/core/utils/widgets/button/custom_button.dart';
+import 'package:shoply_app/core/utils/widgets/cached_image_network/custom_cached_image.dart';
+import 'package:shoply_app/core/utils/widgets/dialog/custom_error.dart';
+import 'package:shoply_app/core/utils/widgets/dialog/custom_success.dart';
+import 'package:shoply_app/core/utils/widgets/empty_screen/empty_screen.dart';
+import 'package:shoply_app/core/utils/widgets/loading/custom_loading.dart';
 import 'package:shoply_app/core/utils/widgets/loading/custom_loading_data.dart';
+import 'package:shoply_app/core/utils/widgets/refresh_indicator/custom_refresh_indicator.dart';
 import 'package:shoply_app/core/utils/widgets/responsive/responsive.dart';
-
 import 'package:shoply_app/features/favorite/view_model/cubit.dart';
 import 'package:shoply_app/features/favorite/view_model/state.dart';
-import 'package:shoply_app/features/products/view_model/cubit.dart';
-import 'package:shoply_app/features/products/view_model/state.dart';
 
-import 'widgets/favorite_products_card.dart';
+part 'widgets/favorite_grid.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Responsive.isTablet(context);
+
     return BlocProvider(
-      create: (_) => ProductsCubit()..getProducts(categoryId: 'all'),
+      create: (context) => FavoriteCubit()..getFavourite(),
       child: Scaffold(
-        appBar: const CustomAppBar(titleText: 'Favorite Products'),
-        body: BlocBuilder<ProductsCubit, ProductsState>(
-          builder: (context, productsState) {
-            final productsCubit = context.read<ProductsCubit>();
+        body: SafeArea(
+          child: BlocConsumer<FavoriteCubit, FavoriteState>(
+            listener: (context, state) {
+              if (state is FavoriteAddToCartLoadingState) {
+                CustomLoading.showDialogLoading(context: context);
+              } else if (state is FavoriteAddToCartErrorState) {
+                Navigator.pop(context);
 
-            if (productsState is ProductsLoadingState) {
-              return CustomLoadingData();
-            }
-
-            if (productsState is ProductsErrorState) {
-              return Center(
-                child: Text(
-                  productsState.errorMessage,
-                  textAlign: TextAlign.center,
-                ),
-              );
-            }
-
-            return BlocBuilder<FavoriteCubit, FavoriteState>(
-              builder: (context, favoriteState) {
-                final favoriteCubit = context.read<FavoriteCubit>();
-
-                final favoriteProducts = productsCubit.responseProducts.where((
-                  product,
-                ) {
-                  final productId = product.id;
-
-                  return productId != null &&
-                      favoriteCubit.isFavorite(productId);
-                }).toList();
-
-                if (favoriteProducts.isEmpty) {
-                  return const Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.favorite_border,
-                          size: 70,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          'No favorite products yet',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-
-                return LayoutBuilder(
-                  builder: (context, constraints) {
-                    final width = constraints.maxWidth;
-
-                    final crossAxisCount = width >= 900
-                        ? 4
-                        : width >= 600
-                        ? 3
-                        : 2;
-
-                    final spacing = Responsive.width(12);
-                    final itemWidth =
-                        (width -
-                            Responsive.width(24) -
-                            spacing * (crossAxisCount - 1)) /
-                        crossAxisCount;
-
-                    final imageHeight = itemWidth * 0.85;
-                    final itemHeight = imageHeight + Responsive.height(100);
-
-                    return Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1100),
-                        child: GridView.builder(
-                          padding: EdgeInsets.all(Responsive.width(12)),
-                          itemCount: favoriteProducts.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: crossAxisCount,
-                                mainAxisExtent: itemHeight,
-                                crossAxisSpacing: spacing,
-                                mainAxisSpacing: Responsive.height(16),
-                              ),
-                          itemBuilder: (context, index) {
-                            final product = favoriteProducts[index];
-
-                            return FavoriteProductsCard(
-                              key: ValueKey(product.id),
-                              product: product,
-                              imageHeight: imageHeight,
-                            );
-                          },
-                        ),
-                      ),
-                    );
+                CustomDialogError.showProDialogError(
+                  context: context,
+                  title: 'Add to Cart',
+                  description: state.errorMessage,
+                  onPressed: () {
+                    Navigator.pop(context);
                   },
                 );
-              },
-            );
-          },
+              } else if (state is FavoriteAddToCartSuccessState) {
+                Navigator.pop(context);
+
+                CustomSuccessDialog.showProSuccessDialog(
+                  context: context,
+                  title: 'Add to Cart',
+                  description: 'Added to cart successfully.',
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                );
+              }
+            },
+            builder: (context, state) {
+              final cubit = context.read<FavoriteCubit>();
+
+              if (state is FavoriteLoadingState) {
+                return const Center(child: CustomLoadingData());
+              }
+
+              if (state is FavoriteErrorState) {
+                return Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(Responsive.width(16)),
+                    child: Text(
+                      state.errorMessage,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: Responsive.font(16)),
+                    ),
+                  ),
+                );
+              }
+
+              return CustomRefreshIndicator(
+                onRefresh: () async {
+                  await cubit.refreshFavourite();
+                },
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: isTablet ? 1100 : double.infinity,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Responsive.width(isTablet ? 24 : 8),
+                        vertical: Responsive.height(8),
+                      ),
+                      child: cubit.responseProducts.isEmpty
+                          ? EmptyScreen(
+                              emptyText:
+                                  'Your favourite is empty. Start shopping!',
+                            )
+                          : _FavoriteGrid(),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

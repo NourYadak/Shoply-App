@@ -47,6 +47,7 @@ class _ProductsGrid extends StatelessWidget {
                   arguments: {
                     'responseProducts': productsData,
                     'mainCubit': mainCubit,
+                    
                   },
                 );
               },

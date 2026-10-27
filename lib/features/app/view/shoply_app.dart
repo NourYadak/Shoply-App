@@ -14,6 +14,7 @@ class ShoplyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
+        
         return MaterialApp(
           title: 'Shoply App',
           onGenerateRoute: AppRoutes.onGenerateRoute,

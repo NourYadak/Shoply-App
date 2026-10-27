@@ -41,13 +41,14 @@ class _CartCard extends StatelessWidget {
             ),
           ),
           child: Container(
+            width: Responsive.width(isTablet ? 400 : 380),
             padding: EdgeInsets.symmetric(
               vertical: Responsive.height(10),
-              horizontal: Responsive.width(8),
+              horizontal: Responsive.width(10),
             ),
             decoration: BoxDecoration(
               color: Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(Responsive.radius(16)),
+              borderRadius: BorderRadius.circular(Responsive.radius(20)),
             ),
             child: Row(
               children: [
@@ -89,71 +90,54 @@ class _CartCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: Responsive.height(12)),
-                      Container(
-                        height: Responsive.height(35),
-                        constraints: BoxConstraints(
-                          maxWidth: Responsive.width(isTablet ? 170 : 145),
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade300),
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(
-                            Responsive.radius(12),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: IconButton(
-                                padding: EdgeInsets.zero,
-                                onPressed: () {
-                                  cubit.decrementQuantity(index: index);
-                                },
-                                icon: Icon(
-                                  Icons.remove,
-                                  size: Responsive.width(20),
+                      BlocBuilder<CartCubit, CartState>(
+                        buildWhen: (previous, current) =>
+                            current is CartUpdateQuantitySuccessState,
+                        builder: (context, state) {
+                          return Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                _CartQuantityButton(
+                                  icon: Icons.remove_rounded,
+                                  onTap: () {
+                                    cubit.decrementQuantity(index: index);
+                                  },
                                 ),
-                              ),
-                            ),
-                            VerticalDivider(
-                              width: 1,
-                              color: Colors.grey.shade300,
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: Text(
-                                  cartData.quantity.toString(),
-                                  style: TextStyle(
-                                    fontSize: Responsive.font(17),
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                SizedBox(
+                                  width: Responsive.width(44),
+                                  child: Center(
+                                    child: Text(
+                                      '${cubit.responseCart[index].quantity ?? 1}',
+                                      style: TextStyle(
+                                        fontSize: Responsive.font(17),
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            VerticalDivider(
-                              width: 1,
-                              color: Colors.grey.shade300,
-                            ),
-                            Expanded(
-                              child: IconButton(
-                                padding: EdgeInsets.zero,
-                                onPressed: () {
-                                  cubit.incrementQuantity(index: index);
-                                },
-                                icon: Icon(
-                                  Icons.add,
-                                  size: Responsive.width(20),
+                                _CartQuantityButton(
+                                  icon: Icons.add_rounded,
+                                  onTap: () {
+                                    cubit.incrementQuantity(index: index);
+                                  },
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ],
                   ),
                 ),
                 SizedBox(width: Responsive.width(4)),
+
                 IconButton(
                   constraints: BoxConstraints(minWidth: Responsive.width(32)),
                   padding: EdgeInsets.zero,
@@ -174,6 +158,34 @@ class _CartCard extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _CartQuantityButton extends StatelessWidget {
+  const _CartQuantityButton({required this.icon, required this.onTap});
+
+  final IconData icon;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.white,
+      shape: const CircleBorder(),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: SizedBox(
+          width: Responsive.width(30),
+          height: Responsive.height(36),
+          child: Icon(
+            icon,
+            size: Responsive.width(19),
+            color: AppColors.primaryColor,
+          ),
+        ),
+      ),
     );
   }
 }

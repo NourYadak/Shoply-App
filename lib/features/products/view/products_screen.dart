@@ -6,10 +6,11 @@ import 'package:shoply_app/core/utils/widgets/cached_image_network/custom_cached
 import 'package:shoply_app/core/utils/widgets/loading/custom_loading_data.dart';
 import 'package:shoply_app/core/utils/widgets/refresh_indicator/custom_refresh_indicator.dart';
 import 'package:shoply_app/features/main/view_model/cubit.dart';
+
 import 'package:shoply_app/features/products/view_model/cubit.dart';
 import 'package:shoply_app/features/products/view_model/state.dart';
-import 'package:shoply_app/features/favorite/view_model/state.dart';
-import 'package:shoply_app/features/favorite/view_model/cubit.dart';
+
+
 import 'package:shoply_app/core/utils/widgets/responsive/responsive.dart';
 part 'widgets/products_grid.dart';
 

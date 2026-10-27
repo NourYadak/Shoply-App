@@ -62,13 +62,22 @@ class _CartCheckout extends StatelessWidget {
                     const Spacer(),
                     const SizedBox(width: 130),
                     Flexible(
-                      child: Text(
-                        '\$ ${cubit.subTotal.toStringAsFixed(2)}',
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: Responsive.font(isTablet ? 24 : 20),
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: BlocBuilder<CartCubit, CartState>(
+                        buildWhen: (previous, current) =>
+                            current is CartUpdateQuantitySuccessState ||
+                            current is CartSuccessState ||
+                            current is CartDeleteProductSuccessState ||
+                            current is CartCheckoutSuccessState,
+                        builder: (context, state) {
+                          return Text(
+                            '\$ ${context.read<CartCubit>().subTotal.toStringAsFixed(2)}',
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontSize: Responsive.font(isTablet ? 24 : 20),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

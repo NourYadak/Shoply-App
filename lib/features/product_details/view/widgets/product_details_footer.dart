@@ -1,112 +1,195 @@
-
 part of '../product_details_screen.dart';
 
 class _ProductDetailsFooter extends StatelessWidget {
-  const _ProductDetailsFooter({
-    required this.responseProducts,
-  });
+  const _ProductDetailsFooter({required this.responseProducts});
 
   final ResponseProducts responseProducts;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProductDetailsCubit>();
-    final isTablet = Responsive.isTablet(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: Responsive.width(16),
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: Responsive.width(10),
-          ),
-          height: Responsive.height(52),
-          width: Responsive.width(isTablet ? 220 : 190),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade300,
-              width: 1,
+    return SafeArea(
+      top: false,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(top: BorderSide(color: Colors.grey.shade200)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 12,
+              offset: const Offset(0, -3),
             ),
-            color: Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(
-              Responsive.radius(16),
+          ],
+        ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 720),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Quantity selector
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            'Quantity',
+                            style: TextStyle(
+                              fontFamily: 'quickSand',
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          _QuantityControlButton(
+                            icon: Icons.remove_rounded,
+                            onTap: cubit.decrementQuantity,
+                          ),
+                          SizedBox(
+                            width: 44,
+                            child:
+                                BlocBuilder<
+                                  ProductDetailsCubit,
+                                  ProductDetailsState
+                                >(
+                                  buildWhen: (previous, current) =>
+                                      current
+                                          is ProductDetailsChangeQuantityState,
+                                  builder: (context, state) {
+                                    return Text(
+                                      '${cubit.quantity}',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    );
+                                  },
+                                ),
+                          ),
+                          _QuantityControlButton(
+                            icon: Icons.add_rounded,
+                            onTap: cubit.incrementQuantity,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 14),
+
+                // Total price and Add to Cart
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Total price',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          const SizedBox(height: 3),
+                          BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+                            buildWhen: (previous, current) =>
+                                current is ProductDetailsChangeQuantityState,
+                            builder: (context, state) {
+                              final total =
+                                  (responseProducts.price ?? 0) *
+                                  cubit.quantity;
+
+                              return FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '\$${total.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      flex: 2,
+                      child: CustomButton(
+                        buttonText: 'Add to Cart',
+                        onPressed: () {
+                          cubit.addToCart(
+                            context: context,
+                            requestCart: Cart(
+                              id: responseProducts.id,
+                              name: responseProducts.name,
+                              price: responseProducts.price,
+                              quantity: cubit.quantity,
+                              images: responseProducts.images,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: IconButton(
-                  onPressed: cubit.decrementQuantity,
-                  icon: const Icon(Icons.remove),
-                  iconSize: Responsive.width(25),
-                  padding: EdgeInsets.zero,
-                ),
-              ),
-              VerticalDivider(
-                color: Colors.grey.shade300,
-                width: Responsive.width(1),
-              ),
-              Expanded(
-                child: Center(
-                  child: BlocBuilder<
-                      ProductDetailsCubit,
-                      ProductDetailsState>(
-                    buildWhen: (previous, current) =>
-                        current is ProductDetailsChangeQuantityState,
-                    builder: (context, state) {
-                      return Text(
-                        cubit.quantity.toString(),
-                        style: TextStyle(
-                          fontSize: Responsive.font(19),
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              VerticalDivider(
-                color: Colors.grey.shade300,
-                width: Responsive.width(1),
-              ),
-              Expanded(
-                child: IconButton(
-                  onPressed: cubit.incrementQuantity,
-                  icon: const Icon(Icons.add),
-                  iconSize: Responsive.width(25),
-                  padding: EdgeInsets.zero,
-                ),
-              ),
-            ],
           ),
         ),
-        SizedBox(height: Responsive.height(28)),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Responsive.width(16),
-          ),
-          child: CustomButton(
-            buttonText: 'Add to Cart',
-            onPressed: () {
-              cubit.addToCart(
-                context: context,
-                requestCart: Cart(
-                  id: responseProducts.id,
-                  name: responseProducts.name,
-                  price: responseProducts.price,
-                  quantity: cubit.quantity,
-                  images: responseProducts.images,
-                ),
-              );
-            },
-          ),
+      ),
+    );
+  }
+}
+
+class _QuantityControlButton extends StatelessWidget {
+  const _QuantityControlButton({required this.icon, required this.onTap});
+
+  final IconData icon;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.white,
+      shape: const CircleBorder(),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: SizedBox(
+          width: 36,
+          height: 36,
+          child: Icon(icon, size: 19, color: AppColors.primaryColor),
         ),
-      ],
+      ),
     );
   }
 }

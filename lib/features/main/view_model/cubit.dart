@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoply_app/core/local/local_storage.dart';
 import 'package:shoply_app/core/local/local_storage_user.dart';
 import 'package:shoply_app/features/cart/view/cart_screen.dart';
@@ -10,10 +11,13 @@ import 'package:shoply_app/features/main/view_model/state.dart';
 import 'package:shoply_app/features/profile/view/profile_screen.dart';
 
 class MainCubit extends Cubit<MainState> {
-  MainCubit() : super(MainInitState());
+  MainCubit() : super(MainInitState()) {
+    _initMain();
+  }
   final _mainRepo = MainRepo();
   int navBarIndex = 0;
   int cartCount = 0;
+  int favouriteCount = 0;
 
   List<Widget> page = [
     HomeScreen(),
@@ -21,6 +25,10 @@ class MainCubit extends Cubit<MainState> {
     CartScreen(),
     ProfileScreen(),
   ];
+
+  Future<void> _initMain() async {
+    await Future.wait([getCartCount(), _getFavouriteCount()]);
+  }
 
   void changeNavBarIndex({required int index}) {
     navBarIndex = index;
@@ -32,6 +40,14 @@ class MainCubit extends Cubit<MainState> {
     result.fold((_) {}, (cartCount) {
       this.cartCount = cartCount;
       emit(MainChangeCartCountState());
+    });
+  }
+
+  Future<void> _getFavouriteCount() async {
+    final result = await _mainRepo.getFavouriteCount();
+    result.fold((_) {}, (favouriteCount) {
+      this.favouriteCount = favouriteCount;
+      emit(MainChangeFavoriteCountState());
     });
   }
 
@@ -49,5 +65,15 @@ class MainCubit extends Cubit<MainState> {
   void removeCartCount() {
     cartCount = 0;
     emit(MainChangeCartCountState());
+  }
+
+  void incrementFavouriteCount() {
+    favouriteCount++;
+    emit(MainChangeFavoriteCountState());
+  }
+
+  void decrementFavouriteCount() {
+    favouriteCount--;
+    emit(MainChangeFavoriteCountState());
   }
 }

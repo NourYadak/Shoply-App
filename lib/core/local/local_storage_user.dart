@@ -5,19 +5,19 @@ class LocalStorageUser {
   static LocalStorageUser? _instance;
   static FlutterSecureStorage? _secureStorage;
 
-  static String? _email;
   static String? _uid;
+  static String? _email;
   static String? _fullName;
+  static String? _address;
   static String? _userName;
   static String? _profileImage;
-  static String? _address;
 
-  String get uid => _uid ?? '';
   String get email => _email ?? '';
+  String get uid => _uid ?? '';
   String get fullName => _fullName ?? '';
-  String get profileImage => _profileImage ?? '';
   String get userName => _userName ?? '';
   String get address => _address ?? '';
+  String get profileImage => _profileImage ?? '';
 
   LocalStorageUser._init() {
     _instance = this;

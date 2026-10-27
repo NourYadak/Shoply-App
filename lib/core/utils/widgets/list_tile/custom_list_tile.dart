@@ -16,7 +16,7 @@ class CustomListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: Icon(iconData, size: 30, color: color ?? Colors.black),
+      leading: Icon(iconData, size: 25, color: color ?? Colors.black),
       title: Text(
         title,
         style: TextStyle(

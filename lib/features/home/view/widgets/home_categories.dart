@@ -6,34 +6,29 @@ class _HomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<HomeCubit>();
-    final isTablet = Responsive.isTablet(context);
-
     return Column(
       children: [
         CustomViewAll(
           text: 'Categories',
           onTapViewAll: () {
-            final mainCubit = context.read<MainCubit>();
-
             Navigator.pushNamed(
               context,
               AppPages.categoriesScreen,
-              arguments: {'mainCubit': mainCubit},
+              arguments: context.read<MainCubit>(),
             );
           },
         ),
         SizedBox(
-          height: Responsive.height(isTablet ? 200 : 170),
+          height: 170,
           child: ListView.separated(
             separatorBuilder: (context, index) {
-              return SizedBox(width: Responsive.width(10));
+              return SizedBox(width: 10);
             },
             scrollDirection: Axis.horizontal,
-            itemCount: cubit.responseCategories.length,
-            padding: EdgeInsets.symmetric(horizontal: Responsive.width(12)),
+            itemCount: cubit.ressponseCategories.length,
+            padding: EdgeInsets.symmetric(horizontal: 12),
             itemBuilder: (context, index) {
-              final categoryData = cubit.responseCategories[index];
-
+              final categoryData = cubit.ressponseCategories[index];
               return GestureDetector(
                 onTap: () {
                   final mainCubit = context.read<MainCubit>();
@@ -47,40 +42,31 @@ class _HomeCategories extends StatelessWidget {
                     },
                   );
                 },
-                child: SizedBox(
-                  width: Responsive.width(isTablet ? 170 : 150),
-                  child: Column(
-                    children: [
-                      SizedBox(height: Responsive.height(12)),
-                      Container(
-                        width: Responsive.width(isTablet ? 150 : 130),
-                        height: Responsive.height(isTablet ? 120 : 100),
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.radius(16),
-                          ),
-                          color: Colors.grey.shade200,
-                        ),
-                        child: CustomCachedImageNetwork(
-                          image: categoryData.image ?? '',
-                          fit: BoxFit.cover,
-                        ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.grey.shade200,
                       ),
-                      SizedBox(height: Responsive.height(8)),
-                      Text(
-                        categoryData.name ?? '',
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: Responsive.font(15),
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black,
-                        ),
+                      child: CustomCachedImageNetwork(
+                        height: 100,
+                        fit: BoxFit.contain,
+                        width: 120,
+                        image: categoryData.image ?? '',
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      categoryData.name ?? '',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               );
             },

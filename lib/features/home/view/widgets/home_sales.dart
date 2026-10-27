@@ -6,16 +6,12 @@ class _HomeSales extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<HomeCubit>();
-    final isTablet = Responsive.isTablet(context);
-
     return Container(
       clipBehavior: Clip.antiAlias,
-      margin: EdgeInsets.symmetric(horizontal: Responsive.width(10)),
-      height: Responsive.height(isTablet ? 260 : 170),
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      height: 170,
       width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Responsive.radius(12)),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: CustomCachedImageNetwork(
         fit: BoxFit.contain,
         image: cubit.responseSales?.image ?? '',

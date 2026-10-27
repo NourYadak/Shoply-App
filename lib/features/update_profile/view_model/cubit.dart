@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoply_app/core/helper/image_picker_helper.dart';
+import 'package:shoply_app/core/local/local_storage_user.dart';
 import 'package:shoply_app/core/model/update_profile/request_update_profile.dart';
 import 'package:shoply_app/features/update_profile/repo/update_profile_repo.dart';
 import 'package:shoply_app/features/update_profile/view_model/state.dart';
@@ -17,6 +18,17 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
   final formKey = GlobalKey<FormState>();
   File? image;
+
+  Future<void> init() async {
+    final user = await LocalStorageUser.instance.getUserData();
+
+    fullNameController.text = user.fullName ?? '';
+    userNameController.text = user.userName ?? '';
+    emailController.text = user.email ?? '';
+    addressController.text = user.address ?? '';
+
+    emit(UpdateProfileInitState());
+  }
 
   void pickImage() async {
     final imageFile = await ImagePickerHelper.pickImageGallery();

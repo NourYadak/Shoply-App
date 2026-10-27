@@ -5,7 +5,7 @@ class _SettingsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTablet = Responsive.isTablet(context);
+
 
     return Column(
       children: [

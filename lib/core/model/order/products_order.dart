@@ -18,6 +18,19 @@ class ProductsOrder {
     required this.cart,
     required this.status,
   });
+  factory ProductsOrder.fromJson(Map<String, dynamic> json) {
+    return ProductsOrder(
+      id: json['id'],
+      userUid: json['userUid'],
+      fullName: json['fullName'],
+      address: json['address'],
+      subTotal: (json['subTotal'] as num?)?.toDouble(),
+      status: json['status'],
+      cart: json['cart'] != null
+          ? (json['cart'] as List).map((item) => Cart.fromJson(item)).toList()
+          : null,
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

@@ -76,7 +76,6 @@ class _ContactForm extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'quickSand',
             fontWeight: FontWeight.w500,
-
             fontSize: Responsive.font(isTablet ? 16 : 14),
             color: Colors.grey.shade600,
           ),
