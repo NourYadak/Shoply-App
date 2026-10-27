@@ -75,7 +75,7 @@ class CartScreen extends StatelessWidget {
             },
             child: cubit.responseCart.isEmpty
                 ? const EmptyScreen(
-                    emptyText: 'Your cart is empty. Start shopping!',
+                    emptyText: 'Your cart is empty.\n Start shopping!',
                   )
                 : Center(
                     child: ConstrainedBox(
