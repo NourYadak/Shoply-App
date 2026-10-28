@@ -33,7 +33,7 @@ class ProductDetailsScreen extends StatelessWidget {
           final cubit = context.read<ProductDetailsCubit>();
 
           return Scaffold(
-            backgroundColor: const Color(0xFFF8F8FA),
+            backgroundColor: Theme.of(context).cardColor,
             appBar: CustomAppBar(
               actions: [
                 BlocBuilder<ProductDetailsCubit, ProductDetailsState>(

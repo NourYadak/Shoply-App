@@ -27,7 +27,7 @@ class UpdateProfileScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => UpdateProfileCubit()..init(),
       child: Scaffold(
-        backgroundColor: const Color(0xFFF7F8FA),
+        backgroundColor: Theme.of(context).cardColor,
         appBar: const CustomAppBar(titleText: 'Update Profile'),
         body: BlocListener<UpdateProfileCubit, UpdateProfileState>(
           listener: (context, state) {
@@ -81,14 +81,16 @@ class UpdateProfileScreen extends StatelessWidget {
                                 Responsive.width(isTablet ? 24 : 18),
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(
                                   Responsive.radius(20),
                                 ),
-                                border: Border.all(color: Colors.grey.shade200),
+                                border: Border.all(
+                                  color: Theme.of(context).primaryColor,
+                                ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.03),
+                                    color: Theme.of(context).primaryColor,
                                     blurRadius: 18,
                                     offset: const Offset(0, 5),
                                   ),

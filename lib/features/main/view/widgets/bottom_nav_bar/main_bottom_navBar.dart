@@ -36,7 +36,7 @@ class _MainBottomNavBar extends StatelessWidget {
                     Icons.home,
                     size: Responsive.width(isTablet ? 29 : 24),
                   ),
-                  label: 'Home',
+                  label: LocaleKeys.Language_home.tr(),
                 ),
                 NavigationDestination(
                   icon: Icon(
@@ -47,7 +47,7 @@ class _MainBottomNavBar extends StatelessWidget {
                     Icons.favorite,
                     size: Responsive.width(isTablet ? 29 : 24),
                   ),
-                  label: 'Favorite',
+                  label: LocaleKeys.Language_favorite.tr(),
                 ),
                 NavigationDestination(
                   icon: Icon(
@@ -58,7 +58,7 @@ class _MainBottomNavBar extends StatelessWidget {
                     Icons.shopping_bag,
                     size: Responsive.width(isTablet ? 29 : 24),
                   ),
-                  label: 'Cart',
+                  label: LocaleKeys.Language_cart.tr(),
                 ),
                 NavigationDestination(
                   icon: Icon(
@@ -69,7 +69,7 @@ class _MainBottomNavBar extends StatelessWidget {
                     Icons.person_2,
                     size: Responsive.width(isTablet ? 29 : 24),
                   ),
-                  label: 'Profile',
+                  label: LocaleKeys.Language_profile.tr(),
                 ),
               ],
             ),

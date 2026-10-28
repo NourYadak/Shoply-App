@@ -14,7 +14,7 @@ class _ProductDetailsFooter extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).disabledColor,
           border: Border(top: BorderSide(color: Colors.grey.shade200)),
           boxShadow: [
             BoxShadow(
@@ -38,13 +38,13 @@ class _ProductDetailsFooter extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
+                          Text(
                             'Quantity',
                             style: TextStyle(
                               fontFamily: 'quickSand',
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Theme.of(context).dividerColor,
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -54,7 +54,7 @@ class _ProductDetailsFooter extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Row(
@@ -78,10 +78,10 @@ class _ProductDetailsFooter extends StatelessWidget {
                                     return Text(
                                       '${cubit.quantity}',
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: Theme.of(context).dividerColor,
                                       ),
                                     );
                                   },

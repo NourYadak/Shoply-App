@@ -48,7 +48,7 @@ class _HomeCategories extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: Colors.grey.shade200,
+                        color: Theme.of(context).cardColor,
                       ),
                       child: CustomCachedImageNetwork(
                         height: 100,

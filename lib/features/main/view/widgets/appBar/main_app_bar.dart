@@ -1,4 +1,3 @@
-
 part of '../../main_screen.dart';
 
 class _MainAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,7 +16,7 @@ class _MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: TextStyle(
               fontSize: Responsive.font(isTablet ? 30 : 25),
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: Theme.of(context).dividerColor,
               fontStyle: FontStyle.normal,
             ),
           ),

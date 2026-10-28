@@ -9,7 +9,7 @@ class _HomeSales extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.symmetric(horizontal: 10),
-      height: 170,
+      height: 160,
       width: double.infinity,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: CustomCachedImageNetwork(

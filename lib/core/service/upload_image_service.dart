@@ -7,12 +7,12 @@ class UploadImageService {
       final imageName = imageFile.uri.pathSegments.last;
       final supasbase = Supabase.instance.client;
       final uplaodImage = await supasbase.storage
-          .from('profile-image')
+          .from('user')
           .upload('uploads/$imageName', imageFile);
 
       if (uplaodImage.isNotEmpty) {
         return supasbase.storage
-            .from('profile-image')
+            .from('user')
             .getPublicUrl('uploads/$imageName');
       } else {
         return null;

@@ -1,4 +1,3 @@
-
 part of '../update_profile_screen.dart';
 
 class _UpdateProfileTextfields extends StatelessWidget {
@@ -12,7 +11,7 @@ class _UpdateProfileTextfields extends StatelessWidget {
     final labelStyle = TextStyle(
       fontSize: Responsive.font(13),
       fontWeight: FontWeight.w600,
-      color: const Color(0xFF424750),
+      color: Theme.of(context).dividerColor,
     );
 
     return Column(
@@ -34,7 +33,7 @@ class _UpdateProfileTextfields extends StatelessWidget {
               style: TextStyle(
                 fontSize: Responsive.font(isTablet ? 18 : 16),
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF202124),
+                color: Theme.of(context).dividerColor,
               ),
             ),
           ],
@@ -47,12 +46,10 @@ class _UpdateProfileTextfields extends StatelessWidget {
           controller: cubit.fullNameController,
           hinText: 'Enter your full name',
           validator: (value) =>
-              value?.trim().isEmpty ?? true
-                  ? 'Full Name is required'
-                  : null,
+              value?.trim().isEmpty ?? true ? 'Full Name is required' : null,
           prefixIcon: Icon(
             Icons.person_outline,
-            color: Colors.grey.shade600,
+            color: Theme.of(context).dividerColor,
           ),
         ),
 
@@ -64,12 +61,10 @@ class _UpdateProfileTextfields extends StatelessWidget {
           controller: cubit.userNameController,
           hinText: 'Enter your username',
           validator: (value) =>
-              value?.trim().isEmpty ?? true
-                  ? 'Username is required'
-                  : null,
+              value?.trim().isEmpty ?? true ? 'Username is required' : null,
           prefixIcon: Icon(
             Icons.alternate_email,
-            color: Colors.grey.shade600,
+            color: Theme.of(context).dividerColor,
           ),
         ),
 
@@ -91,7 +86,7 @@ class _UpdateProfileTextfields extends StatelessWidget {
           },
           prefixIcon: Icon(
             Icons.email_outlined,
-            color: Colors.grey.shade600,
+            color: Theme.of(context).dividerColor,
           ),
         ),
 
@@ -103,12 +98,10 @@ class _UpdateProfileTextfields extends StatelessWidget {
           controller: cubit.addressController,
           hinText: 'City, Country',
           validator: (value) =>
-              value?.trim().isEmpty ?? true
-                  ? 'Address is required'
-                  : null,
+              value?.trim().isEmpty ?? true ? 'Address is required' : null,
           prefixIcon: Icon(
             Icons.location_on_outlined,
-            color: Colors.grey.shade600,
+            color: Theme.of(context).dividerColor,
           ),
         ),
       ],

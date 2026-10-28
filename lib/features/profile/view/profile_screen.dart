@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
                 duration: 420.ms,
               );
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).cardColor,
       // appBar: AppBar(title: const Text('My Profile'), centerTitle: true,
       //     backgroundColor: Colors.white, foregroundColor: green),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -59,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
                 Center(
                   child: CircleAvatar(
                     radius: 55,
-                    backgroundColor: const Color(0xFFE7F4EE),
+                    backgroundColor: Theme.of(context).cardColor,
                     backgroundImage: image.isEmpty ? null : NetworkImage(image),
                     child: image.isEmpty
                         ? const Icon(Icons.person, size: 60, color: green)
@@ -159,7 +159,7 @@ class _Info extends StatelessWidget {
     margin: const EdgeInsets.only(bottom: 12),
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: const Color(0xFFF7F9F8),
+      color: Theme.of(context).cardColor,
       borderRadius: BorderRadius.circular(14),
     ),
     child: Row(

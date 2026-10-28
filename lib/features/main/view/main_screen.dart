@@ -1,8 +1,10 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pro_dialog/pro_dialog.dart';
 import 'package:shoply_app/core/local/local_storage_user.dart';
+import 'package:shoply_app/core/localization/locale_keys.g.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
 import 'package:shoply_app/core/utils/images/app_images.dart';
 import 'package:shoply_app/core/utils/theme/app_colors.dart';

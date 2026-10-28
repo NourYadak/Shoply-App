@@ -2,6 +2,23 @@
     "Language": {
         "language": "Language",
         "english": "English",
-        "arabic": "Arabic"
+        "arabic": "Arabic",
+        "myOrders":"My Orders",
+        "setting":"Settings",
+        "theme":"Theme",
+        "about":"About",
+        "logout":"Logout",
+        "logoutMessage":"Are you sure you want to log out?",
+        "cancel":"Cancel",
+        "home":"Home",
+        "favorite":"Favorite",
+        "cart":"Cart",
+        "emptycart":"Your cart is empty.\n Start shopping!",
+        "profile":"Profile"
+
+
+
+
+
     }
 }

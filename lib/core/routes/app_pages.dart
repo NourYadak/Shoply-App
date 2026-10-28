@@ -18,4 +18,6 @@ class AppPages {
   static const String updatePassScreen = '/UpdatePassScreen';
   static const String updateProfileScreen = '/UpdateProfileScreen';
   static const String ordersScreen = '/OrdersScreen';
+  static const String themeScreen = '/ThemeScreen';
+  static const String languageScreen = '/LanguageScreen';
 }

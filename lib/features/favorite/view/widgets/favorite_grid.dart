@@ -49,17 +49,16 @@ class _FavoriteGrid extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Responsive.radius(16)),
-                border: Border.all(color: Colors.grey.shade300),
+                border: Border.all(color: Theme.of(context).primaryColor),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Product image and remove button
                   SizedBox(
                     width: double.infinity,
                     height: imageHeight,
                     child: Container(
-                      color: Colors.grey.shade100,
+                      color: Theme.of(context).cardColor,
                       child: Stack(
                         fit: StackFit.expand,
                         children: [
@@ -78,7 +77,7 @@ class _FavoriteGrid extends StatelessWidget {
                             top: Responsive.height(6),
                             right: Responsive.width(6),
                             child: Material(
-                              color: Colors.white.withValues(alpha: 0.9),
+                              color: Theme.of(context).cardColor,
                               shape: const CircleBorder(),
                               child: InkWell(
                                 customBorder: const CircleBorder(),
@@ -127,7 +126,7 @@ class _FavoriteGrid extends StatelessWidget {
                               fontSize: Responsive.font(15),
                               fontWeight: FontWeight.w700,
                             ),
-                            maxLines: 1,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
 

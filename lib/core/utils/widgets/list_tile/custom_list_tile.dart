@@ -17,14 +17,7 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       leading: Icon(iconData, size: 25, color: color ?? Colors.black),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: color ?? Colors.black,
-        ),
-      ),
+      title: Text(title, style: Theme.of(context).textTheme.bodySmall),
     );
   }
 }

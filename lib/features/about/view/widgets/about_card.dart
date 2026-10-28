@@ -65,7 +65,7 @@ class _AboutTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).cardColor,
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
         onTap: onTap,
@@ -76,7 +76,7 @@ class _AboutTile extends StatelessWidget {
             vertical: Responsive.height(18),
           ),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: Theme.of(context).cardColor,
 
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.grey.shade200),
@@ -91,7 +91,7 @@ class _AboutTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: Responsive.font(16),
                     fontWeight: FontWeight.w600,
-                    color: Colors.black87,
+                    color: Theme.of(context).dividerColor,
                   ),
                 ),
               ),

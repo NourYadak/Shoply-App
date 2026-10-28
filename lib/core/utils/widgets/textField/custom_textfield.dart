@@ -41,16 +41,19 @@ class _MainTextFieldState extends State<CustomTextField> {
       style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.bold,
-        color: Colors.black,
+        color: Theme.of(context).dividerColor,
       ),
       textInputAction: TextInputAction.next,
       validator: widget.validator,
-      cursorColor: Colors.grey,
+      cursorColor: Theme.of(context).cardColor,
       decoration: InputDecoration(
         helperText: '',
         helperStyle: TextStyle(fontSize: 10),
         hintText: widget.hinText,
-        hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+        hintStyle: TextStyle(
+          color: Theme.of(context).dividerColor,
+          fontSize: 14,
+        ),
         suffixIcon: widget.obscureText == true
             ? GestureDetector(
                 onTap: () {
@@ -71,7 +74,7 @@ class _MainTextFieldState extends State<CustomTextField> {
             : null,
         contentPadding: EdgeInsets.symmetric(vertical: 17, horizontal: 10),
         prefixIcon: widget.prefixIcon,
-        fillColor: Colors.grey.shade300.withValues(alpha: 0.5),
+        fillColor: Theme.of(context).cardColor,
         filled: true,
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
@@ -91,7 +94,10 @@ class _MainTextFieldState extends State<CustomTextField> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(
+            width: 0.8,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoply_app/core/localization/locale_keys.g.dart';
 import 'package:shoply_app/core/utils/theme/app_colors.dart';
 import 'package:shoply_app/core/utils/widgets/button/custom_button.dart';
 import 'package:shoply_app/core/utils/widgets/cached_image_network/custom_cached_image.dart';
@@ -74,9 +76,7 @@ class CartScreen extends StatelessWidget {
               await cubit.refreshCart();
             },
             child: cubit.responseCart.isEmpty
-                ? const EmptyScreen(
-                    emptyText: 'Your cart is empty.\n Start shopping!',
-                  )
+                ? EmptyScreen(emptyText: LocaleKeys.Language_emptycart.tr())
                 : Center(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(

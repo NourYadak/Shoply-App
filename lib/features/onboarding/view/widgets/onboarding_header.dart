@@ -1,4 +1,3 @@
-
 part of '../on_boarding_screen.dart';
 
 class _OnBoardingHeader extends StatelessWidget {
@@ -40,12 +39,8 @@ class _OnBoardingHeader extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image(
-                              image: AssetImage(
-                                cubit.onBoardingImage[index],
-                              ),
-                              height: Responsive.height(
-                                isTablet ? 380 : 280,
-                              ),
+                              image: AssetImage(cubit.onBoardingImage[index]),
+                              height: Responsive.height(isTablet ? 380 : 280),
                               width: double.infinity,
                               fit: BoxFit.contain,
                             ),
@@ -54,9 +49,7 @@ class _OnBoardingHeader extends StatelessWidget {
                               cubit.onBoardingTitle[index],
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: Responsive.font(
-                                  isTablet ? 30 : 25,
-                                ),
+                                fontSize: Responsive.font(isTablet ? 30 : 25),
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -66,9 +59,7 @@ class _OnBoardingHeader extends StatelessWidget {
                               cubit.onBoardingDescription[index],
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: Responsive.font(
-                                  isTablet ? 18 : 15,
-                                ),
+                                fontSize: Responsive.font(isTablet ? 18 : 15),
                                 fontWeight: FontWeight.w600,
                                 color: Colors.grey.shade600,
                               ),

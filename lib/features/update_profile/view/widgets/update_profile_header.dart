@@ -57,8 +57,8 @@ class _UpdateProfileHeader extends StatelessWidget {
         Text(
           'Change profile photo',
           style: TextStyle(
-            color: AppColors.primaryColor,
-            fontSize: Responsive.font(12),
+            color: Theme.of(context).dividerColor,
+            fontSize: Responsive.font(16),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -69,7 +69,7 @@ class _UpdateProfileHeader extends StatelessWidget {
           style: TextStyle(
             fontSize: Responsive.font(isTablet ? 24 : 21),
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF202124),
+            color: Theme.of(context).primaryColor,
           ),
         ),
         SizedBox(height: Responsive.height(7)),

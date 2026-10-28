@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoply_app/core/localization/locale_keys.g.dart';
 
 class EmptyScreen extends StatelessWidget {
   const EmptyScreen({super.key, required this.emptyText});
@@ -11,7 +12,7 @@ class EmptyScreen extends StatelessWidget {
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w700,
-          color: Colors.black,
+          color: Theme.of(context).dividerColor,
         ),
       ),
     );

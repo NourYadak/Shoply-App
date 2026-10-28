@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoply_app/core/helper/image_picker_helper.dart';
 import 'package:shoply_app/core/local/local_storage_user.dart';
+import 'package:shoply_app/core/model/login/response_login.dart';
 import 'package:shoply_app/core/model/update_profile/request_update_profile.dart';
 import 'package:shoply_app/features/update_profile/repo/update_profile_repo.dart';
 import 'package:shoply_app/features/update_profile/view_model/state.dart';
@@ -62,6 +63,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
           emit(UpdateProfileErrorState(errorMessage: errorMessage));
         },
         (_) {
+          
           emit(
             UpdateProfileSuccessState(
               successMessage: 'Profile Updated Successfully',

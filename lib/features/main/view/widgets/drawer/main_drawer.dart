@@ -74,11 +74,20 @@ class _MainDrawer extends StatelessWidget {
 
               const Divider(thickness: 0.1, color: Colors.grey),
 
+              CustomListTile(
+                iconData: Icons.language_outlined,
+                title: LocaleKeys.Language_language.tr(),
+
+                onTap: () {
+                  Navigator.pushNamed(context, AppPages.languageScreen);
+                },
+              ),
+
               SizedBox(height: Responsive.height(20)),
 
               CustomListTile(
                 iconData: Icons.shopping_bag_outlined,
-                title: 'My Orders',
+                title: LocaleKeys.Language_myOrders.tr(),
                 onTap: () {
                   Navigator.pushNamed(context, AppPages.ordersScreen);
                 },
@@ -88,7 +97,8 @@ class _MainDrawer extends StatelessWidget {
 
               CustomListTile(
                 iconData: Icons.settings_outlined,
-                title: 'Settings',
+                title: LocaleKeys.Language_setting.tr(),
+
                 onTap: () {
                   Navigator.pushNamed(context, AppPages.settingsScreen);
                 },
@@ -97,8 +107,20 @@ class _MainDrawer extends StatelessWidget {
               SizedBox(height: Responsive.height(20)),
 
               CustomListTile(
+                iconData: Icons.dark_mode_outlined,
+                title: LocaleKeys.Language_theme.tr(),
+
+                onTap: () {
+                  Navigator.pushNamed(context, AppPages.themeScreen);
+                },
+              ),
+
+              SizedBox(height: Responsive.height(20)),
+
+              CustomListTile(
                 iconData: Icons.info_outline,
-                title: 'About',
+                title: LocaleKeys.Language_about.tr(),
+
                 onTap: () {
                   Navigator.pushNamed(context, AppPages.aboutScreen);
                 },
@@ -115,21 +137,21 @@ class _MainDrawer extends StatelessWidget {
                 onTap: () {
                   CustomDialog.showCustomProDialog(
                     context: context,
-                    title: 'Logout',
-                    description: 'Are you sure you want to log out?',
+                    title: LocaleKeys.Language_logout.tr(),
+                    description: LocaleKeys.Language_logoutMessage.tr(),
                     dialogType: DialogType.error,
                     iconBackgroundColor: Colors.red,
                     iconColor: Colors.white,
                     icon: Icons.logout,
                     buttons: [
                       DialogButton(
-                        text: 'Cancel',
+                        text: LocaleKeys.Language_cancel.tr(),
                         onPressed: () {
                           Navigator.pop(context);
                         },
                       ),
                       DialogButton(
-                        text: 'Logout',
+                        text: LocaleKeys.Language_logout.tr(),
                         isPrimary: true,
                         onPressed: () {
                           Navigator.pushNamedAndRemoveUntil(
@@ -145,7 +167,8 @@ class _MainDrawer extends StatelessWidget {
                 },
 
                 iconData: Icons.logout,
-                title: 'Logout',
+                title: LocaleKeys.Language_logout.tr(),
+
                 color: Colors.red,
               ),
             ],

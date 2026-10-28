@@ -78,7 +78,7 @@ class _HomeTrendingProducts extends StatelessWidget {
                           borderRadius: BorderRadius.circular(
                             Responsive.radius(16),
                           ),
-                          color: Colors.grey.shade200,
+                          color: Theme.of(context).disabledColor,
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(
@@ -110,7 +110,7 @@ class _HomeTrendingProducts extends StatelessWidget {
                           style: TextStyle(
                             fontSize: Responsive.font(16),
                             fontWeight: FontWeight.w700,
-                            color: Colors.black,
+                            color: Theme.of(context).dividerColor,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -129,7 +129,7 @@ class _HomeTrendingProducts extends StatelessWidget {
                           style: TextStyle(
                             fontSize: Responsive.font(18),
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Theme.of(context).dividerColor,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

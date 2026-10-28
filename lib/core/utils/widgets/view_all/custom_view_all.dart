@@ -15,14 +15,7 @@ class CustomViewAll extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-              color: Colors.black,
-            ),
-          ),
+          Text(text, style: Theme.of(context).textTheme.bodyMedium),
           Spacer(),
           GestureDetector(
             onTap: onTapViewAll,

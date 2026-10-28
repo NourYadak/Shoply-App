@@ -47,7 +47,6 @@ class _ProductsGrid extends StatelessWidget {
                   arguments: {
                     'responseProducts': productsData,
                     'mainCubit': mainCubit,
-                    
                   },
                 );
               },
@@ -70,7 +69,7 @@ class _ProductsGrid extends StatelessWidget {
                             borderRadius: BorderRadius.circular(
                               Responsive.radius(16),
                             ),
-                            color: Colors.grey.shade200,
+                            color: Theme.of(context).cardColor,
                           ),
                           child: CustomCachedImageNetwork(
                             image: productsData.images.isNotEmpty
@@ -93,12 +92,12 @@ class _ProductsGrid extends StatelessWidget {
                     ),
                     child: Text(
                       productsData.name ?? '',
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: Responsive.font(16),
                         fontWeight: FontWeight.w700,
-                        color: Colors.black,
+                        color: Theme.of(context).dividerColor,
                       ),
                     ),
                   ),

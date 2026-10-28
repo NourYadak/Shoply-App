@@ -14,11 +14,11 @@ class SettingsScreen extends StatelessWidget {
     final isTablet = Responsive.isTablet(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).cardColor,
       appBar: AppBar(
         title: const Text('Settings'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Theme.of(context).cardColor,
+        foregroundColor: Theme.of(context).dividerColor,
         elevation: 0,
       ),
       body: SafeArea(

@@ -3,6 +3,8 @@ import 'package:shoply_app/core/utils/fonts/app_fonts.dart';
 import 'package:shoply_app/core/utils/theme/app_colors.dart';
 
 class AppTheme {
+
+  
   static ThemeData themeLight = ThemeData(
     fontFamily: AppFonts.quikSand,
     scaffoldBackgroundColor: AppColors.backgrroundLight,
@@ -31,13 +33,17 @@ class AppTheme {
         fontStyle: FontStyle.normal,
       ),
       bodySmall: TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: FontWeight.w700,
         color: Colors.black,
       ),
     ),
   );
 
+
+
+
+//theme dark
   static ThemeData themeDark = ThemeData(
     fontFamily: AppFonts.quikSand,
     scaffoldBackgroundColor: AppColors.backgrrounDark,
@@ -59,8 +65,9 @@ class AppTheme {
     ),
     iconTheme: IconThemeData(color: Colors.white),
     textTheme: TextTheme(
+      bodyLarge: TextStyle(),
       bodySmall: TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: FontWeight.w700,
         color: Colors.white,
       ),
